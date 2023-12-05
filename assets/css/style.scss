@@ -1,0 +1,35 @@
+---
+---
+
+// Text
+$section-headings-color: #0A1428 !default;
+$body-text-color: #1E2328 !default;
+$body-link-color: #1e6bb8 !default;
+$blockquote-text-color: #819198 !default;
+
+// Headers
+$header-heading-color: #fff !default;
+$header-bg-color: #005A82 !default;
+$header-bg-color-secondary: #0A323C !default;
+
+.title-and-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+// .page-header {
+//   background-image: url("../img/new_renekton.jpg") !important;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+.project-name {
+    font-size: 40px !important;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    margin-right: 58%  !important;
+}
+
+@import "cayman";
