@@ -11,3 +11,14 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
     a. [Description of Columns](#col_desc)
 3. [Final Model](#final_model) <br>
 4. [Fairness Analysis](#fairness)<br>
+
+## **Framing the Problem** <a name="frame_problem"></a>
+
+## **Baseline Model** <a name="baseline_model"></a>
+
+### **Description of Columns** <a name="col_desc"></a>
+
+## **Final Model** <a name="final_model"></a>
+
+## **Fairness Analysis** <a name="fairness"></a>
+
