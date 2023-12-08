@@ -16,7 +16,7 @@ $header-bg-color-secondary: #0A323C !default;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: left;
+  text-align: center;
 }
 
 .page-header {
@@ -24,6 +24,7 @@ $header-bg-color-secondary: #0A323C !default;
   background-repeat: no-repeat;
   background-size: cover;
   height: 32vw !important;
+  text-align: center;
 }
 
 .project-name {
