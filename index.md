@@ -16,45 +16,46 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 ## **Framing the Problem** <a name="frame_problem"></a>
 League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique playstyle. Certain champions do have similar playstles though, and they are grouped into groups called **classes**. 
 
-League features six main classes for its characters:
+League features six main classes for its characters, each with its own unique strengths and weaknesses:
 
-#### Tanks
+#### **Tanks**
 
 <img src="assets/img/tank_clip.gif" alt="clip of tank gameplay" width="600" height="338">
 
-#### Fighters
+Tanks are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage (i.e. Shen shown above)
+
+#### **Fighters**
 
 <img src="assets/img/fighter_clip.gif" alt="clip of fighter gameplay" width="600" height="338">
 
-#### Assassins
+Fighters are great at taking long fights with enemies due to their consistent damage and resistances, but often lack the ability to deal with long-ranged opponents.
+
+#### **Assassins**
 
 <img src="assets/img/assassin_clip.gif" alt="clip of assassin gameplay" width="600" height="338">
 
-#### Mages
+like Akali and Yone, can deal a huge burst of damage to a single target in a short time and have great mobility, but they often lack defenses and lack sustained damage after the initial burst.
+
+#### **Mages**
 
 <img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
 
-#### Marksmen
+like Lux and Viktor, can damage enemies from a distance with area-of-effect abilities that can hit multiple targets, but these abilities can be dodged by champions with high mobility and must take time to recharge before being used again.
+
+#### **Marksmen**
 
 <img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
 
-#### Supports
+like Caitlyn and Jinx, pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
+
+#### **Supports**
 
 <img src="assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="338">
 
-Each class has its own unique strengths and weaknesses:
+like Sona and Janna, can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
 
-* **Tanks**, like Malphite and Shen, are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage.
-
-* **Fighters**, like Sett and Garen, are great at taking long fights with enemies due to their consistent damage and resistances, but often lack the ability to deal with long-ranged opponents.
-
-* **Assassins**, like Akali and Yone, can deal a huge burst of damage to a single target in a short time and have great mobility, but they often lack defenses and lack sustained damage after the initial burst.
-
-* **Mages**, like Lux and Viktor, can damage enemies from a distance with area-of-effect abilities that can hit multiple targets, but these abilities can be dodged by champions with high mobility and must take time to recharge before being used again.
-
-* **Marksmen**, like Caitlyn and Jinx, pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
-
-* **Supports**, like Sona and Janna, can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
+<br>
+<br>
 
 Due to different classes having different affinities, the distributions of their post-game stats also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. In this notebook, we will look to create a model that predicts which class of champion a player was playing, given their post-game stats.
 
