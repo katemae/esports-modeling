@@ -16,7 +16,17 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 ## **Framing the Problem** <a name="frame_problem"></a>
 League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique playstyle. Certain champions do have similar playstles though, and they are grouped into groups called **classes**. 
 
-League features six main classes for its characters: tanks, fighters, assassins, mages, marksmen, and supports. Each class has its own unique strengths and weaknesses:
+League features six main classes for its characters:
+
+#### Tanks
+
+#### Fighters
+
+#### Assassins
+
+<img src="/assets/img/assassin_clip.gif" alt="clip of assassin gameplay" width="600" height="338">
+
+mages, marksmen, and supports. Each class has its own unique strengths and weaknesses:
 
 * **Tanks**, like Malphite and Shen, are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage.
 
