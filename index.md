@@ -22,37 +22,37 @@ League features six main classes for its characters, each with its own unique st
 
 <img src="assets/img/tank_clip.gif" alt="clip of tank gameplay" width="600" height="338">
 
-Tanks are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage (i.e. Shen shown above)
+Tanks, like Shen (shown above), are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage.
 
 #### **Fighters**
 
 <img src="assets/img/fighter_clip.gif" alt="clip of fighter gameplay" width="600" height="338">
 
-Fighters are great at taking long fights with enemies due to their consistent damage and resistances, but often lack the ability to deal with long-ranged opponents.
+Fighters, like Renekton (shown above), are great at taking long fights with enemies due to their consistent damage and resistances, but often lack the ability to deal with long-ranged opponents.
 
 #### **Assassins**
 
 <img src="assets/img/assassin_clip.gif" alt="clip of assassin gameplay" width="600" height="338">
 
-like Akali and Yone, can deal a huge burst of damage to a single target in a short time and have great mobility, but they often lack defenses and lack sustained damage after the initial burst.
+Assassins, like Kayn (shown above), can deal a huge burst of damage to a single target in a short time and have great mobility, but they often lack defenses and lack sustained damage after the initial burst.
 
 #### **Mages**
 
 <img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="409">
 
-like Lux and Viktor, can damage enemies from a distance with area-of-effect abilities that can hit multiple targets, but these abilities can be dodged by champions with high mobility and must take time to recharge before being used again.
+Mages, like Lux (shown above), can damage enemies from a distance with area-of-effect abilities that can hit multiple targets, but these abilities can be dodged by champions with high mobility and must take time to recharge before being used again.
 
 #### **Marksmen**
 
 <img src="assets/img/mark_clip.gif" alt="clip of marksmen gameplay" width="600" height="409">
 
-like Caitlyn and Jinx, pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
+Marksmen, like Jinx (shown above), pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
 
 #### **Supports**
 
 <img src="assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="409">
 
-like Sona and Janna, can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
+Supports, like Lulu (shown above), can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
 
 <br>
 <br>
