@@ -20,7 +20,11 @@ League features six main classes for its characters:
 
 #### Tanks
 
+<img src="/assets/img/tank_clip.gif" alt="clip of tank gameplay" width="600" height="338">
+
 #### Fighters
+
+<img src="/assets/img/fighter_clip.gif" alt="clip of fighter gameplay" width="600" height="338">
 
 #### Assassins
 
@@ -28,9 +32,15 @@ League features six main classes for its characters:
 
 #### Mages
 
+<img src="/assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
+
 #### Marksmen
 
+<img src="/assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
+
 #### Supports
+
+<img src="/assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="338">
 
 Each class has its own unique strengths and weaknesses:
 
