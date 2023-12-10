@@ -38,19 +38,19 @@ like Akali and Yone, can deal a huge burst of damage to a single target in a sho
 
 #### **Mages**
 
-<img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
+<img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="409">
 
 like Lux and Viktor, can damage enemies from a distance with area-of-effect abilities that can hit multiple targets, but these abilities can be dodged by champions with high mobility and must take time to recharge before being used again.
 
 #### **Marksmen**
 
-<img src="assets/img/mark_clip.gif" alt="clip of marksmen gameplay" width="600" height="338">
+<img src="assets/img/mark_clip.gif" alt="clip of marksmen gameplay" width="600" height="409">
 
 like Caitlyn and Jinx, pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
 
 #### **Supports**
 
-<img src="assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="338">
+<img src="assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="409">
 
 like Sona and Janna, can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
 
