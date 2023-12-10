@@ -44,7 +44,7 @@ like Lux and Viktor, can damage enemies from a distance with area-of-effect abil
 
 #### **Marksmen**
 
-<img src="assets/img/mage_clip.gif" alt="clip of mage gameplay" width="600" height="338">
+<img src="assets/img/mark_clip.gif" alt="clip of marksmen gameplay" width="600" height="338">
 
 like Caitlyn and Jinx, pressure enemies from a distance with their long range and sustained damage, but often die very quickly once enemies get within reach of them.
 
