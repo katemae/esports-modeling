@@ -26,7 +26,13 @@ League features six main classes for its characters:
 
 <img src="/assets/img/assassin_clip.gif" alt="clip of assassin gameplay" width="600" height="338">
 
-mages, marksmen, and supports. Each class has its own unique strengths and weaknesses:
+#### Mages
+
+#### Marksmen
+
+#### Supports
+
+Each class has its own unique strengths and weaknesses:
 
 * **Tanks**, like Malphite and Shen, are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage.
 
