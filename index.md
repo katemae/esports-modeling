@@ -1,4 +1,4 @@
-### DSC 80 Project
+## DSC 80 Project
 ***By Katelyn Abille and Aneesh Pamula*** <br> <br>
 Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matche data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model, as well as assessing the fairness of our model.
 > Our exploratory data analysis on this dataset can be found here:
@@ -13,6 +13,8 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 3. [Final Model](#final_model) <br>
 4. [Fairness Analysis](#fairness)<br>
 
+<br>
+
 ## **Framing the Problem** <a name="frame_problem"></a>
 League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique abilities and techniques. Nonetheless, with over 160 champions, some will have similar playstyles and are thus grouped into **classes**. 
 
@@ -22,7 +24,7 @@ League features six main classes for its champions, each with its own unique str
 
 <img src="assets/img/tank_clip.gif" alt="clip of tank gameplay" width="600" height="338" class="clip">
 
-Tanks, like Shen (shown above), are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often don't deal a lot of damage.
+Tanks, like Shen (shown above), are very difficult to kill and excel at disrupting enemies and forcing attention to themselves, but they often do not deal a lot of damage.
 
 #### **Fighters**
 
@@ -56,11 +58,11 @@ Supports, like Lulu (shown above), can offer a wide range of utility such as stu
 
 <br>
 
-Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. In this notebook, we will look to create a model that predicts which class of champion a player was playing given their post-game statistics.
+Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. **In this notebook, we will look to create a model that predicts which class of champion a player was playing given their post-game statistics.**
 
 ### **Description of Columns** <a name="col_desc"></a>
 
-The post-game statistics that we will be using are the following:
+Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the "time of prediciton*. The post-game data that we will be using are the following:
 
 * `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
 
@@ -82,13 +84,15 @@ The post-game statistics that we will be using are the following:
 
 It is also important to note that `'kills'`, `'deaths'`, and `'assists'` vary from `'killsat15'`, `'assistsat15'`, and `'deathsat15'`. Statistics within the first 15 minutes of a game are vital to our predictions and to a game's overall outcome, as some champions have different early game strategies.
 
-Thus, we will keep all the above columns in our dataset, along with the column corresponding to the champion class to test our model on.
+Thus, we will keep all the above columns in our dataset, along with the column corresponding to a champion's class to test our model on.
 
 <br>
 
 Before we proceed, however, we must first address some of the missing values in our dataset. The vast majority of the missing values are missing by design (MD) because certain leagues do not keep track of certain statistics. For example, leagues like LPL and LDL do not keep track of statistics like gold difference at 15 minutes, or damage mitigated per minute. These statistics are essential to make our predictions, since sometimes getting an early lead over the opponent or mitigating damage is a key part of the playstle of a class as described earlier. 
 
 Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data.
+
+<br>
 
 | class    |   gamelength | position   |   kills |   deaths |   assists |   doublekills |   triplekills |   quadrakills |   pentakills |     dpm |   damagetakenperminute |   damagemitigatedperminute |    wpm |   wcpm |   controlwardsbought |   vspm |   minionkills |   monsterkills |   goldat15 |   xpat15 |   csat15 |   golddiffat15 |   xpdiffat15 |   csdiffat15 |   killsat15 |   assistsat15 |   deathsat15 |
 |:---------|-------------:|:-----------|--------:|---------:|----------:|--------------:|--------------:|--------------:|-------------:|--------:|-----------------------:|---------------------------:|-------:|-------:|---------------------:|-------:|--------------:|---------------:|-----------:|---------:|---------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|
@@ -107,6 +111,14 @@ Because of this, we will be removing the rows corresponding to leagues that do n
 Now our data is ready for predictive modeling!
 
 ## **Baseline Model** <a name="baseline_model"></a>
+
+Before working with all our columns, let's begin by creating a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
+
+* `'position'`: We include this **nominal** bacause each position has certain characteristics that make some classes stronger in those position than others. For example, fighters are often played in the top lane because they are more self sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster. 
+
+* `'gamelength'`: We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
+
+* `'kills'`, `'deaths'`, and `'assists'`:  We include these **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who take on more fights are also more prone to deaths.
 
 ## **Final Model** <a name="final_model"></a>
 
