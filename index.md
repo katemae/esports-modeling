@@ -1,6 +1,6 @@
 ### DSC 80 Project
 ***By Katelyn Abille and Aneesh Pamula*** <br> <br>
-Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matche data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model/
+Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matche data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model, as well as assessing the fairness of our model.
 > Our exploratory data analysis on this dataset can be found here:
 > <br> [An Analysis of Renekton's Presence During the 2022 Season of Professional League of Legends](https://katemae.github.io/esports-data-report/).
 
@@ -14,9 +14,9 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 4. [Fairness Analysis](#fairness)<br>
 
 ## **Framing the Problem** <a name="frame_problem"></a>
-League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique playstyle. Certain champions do have similar playstles though, and they are grouped into groups called **classes**. 
+League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique abilities and techniques. Nonetheless, with over 160 champions, some will have similar playstyles and are thus grouped into **classes**. 
 
-League features six main classes for its characters, each with its own unique strengths and weaknesses:
+League features six main classes for its champions, each with its own unique strengths and weaknesses:
 
 #### **Tanks**
 
@@ -52,17 +52,17 @@ Marksmen, like Jinx (shown above), pressure enemies from a distance with their l
 
 <img src="assets/img/supp_clip.gif" alt="clip of support gameplay" width="600" height="409" class="clip">
 
-Supports, like Lulu (shown above), can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongisde them.
+Supports, like Lulu (shown above), can offer a wide range of utility such as stuns, healing, and damage buffs, but they do not do very much damage and are often very weak without a teammate alongside them.
 
 <br>
 
-Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. In this notebook, we will look to create a model that predicts which class of champion a player was playing, given their post-game statistics.
+Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. In this notebook, we will look to create a model that predicts which class of champion a player was playing given their post-game statistics.
 
 ### **Description of Columns** <a name="col_desc"></a>
 
 The post-game statistics that we will be using are the following:
 
-* `'position'`: The position that the champion was played in; this could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
+* `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
 
 * `'gamelength'`: The length of the game in seconds.
 
@@ -76,11 +76,13 @@ The post-game statistics that we will be using are the following:
 
 * `'minionkills'` and `'monsterkills'`: The number of minions and monsters killed by the player. Minions spawn in the top, middle, and bottom lanes, while monsters spawn in the jungle.
 
-* `'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`: Various statistics at the 15 minute mark of the game. Gold is a resource that allows players to buy items, and experience (abbreviated to xp here) allows champions to strengthen their abilities and grow more powerful. CS is a statistic that reflects the number of minions and monsters a player has killed.
+* `'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, and `'deathsat15'`: Various statistics at the 15 minute mark of the game. Gold is a resource that allows players to buy items, and experience (abbreviated to xp here) allows champions to strengthen their abilities and grow more powerful. CS is a statistic that reflects the number of minions and monsters a player has killed.
 
-* `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`: The difference between the player's and their lane opponent's gold, experience, and CS at the 15 minute mark.
+* `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`: The difference between the player's gold and their lane opponent's gold, experience, and CS at the 15 minute mark.
 
-We will keep these columns in our dataset, along with the column corresponding to the champion class.
+It is also important to note that `'kills'`, `'deaths'`, and `'assists'` vary from `'killsat15'`, `'assistsat15'`, and `'deathsat15'`. Statistics within the first 15 minutes of a game are vital to our predictions and to a game's overall outcome, as some champions have different early game strategies.
+
+Thus, we will keep all the above columns in our dataset, along with the column corresponding to the champion class to test our model on.
 
 <br>
 
