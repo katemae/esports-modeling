@@ -1,6 +1,6 @@
 ## DSC 80 Project
 ***By Katelyn Abille and Aneesh Pamula*** <br> <br>
-Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matche data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model, as well as assessing the fairness of our model.
+Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matches data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model, as well as assessing the fairness of our model.
 > Our exploratory data analysis on this dataset can be found here:
 > <br> [An Analysis of Renekton's Presence During the 2022 Season of Professional League of Legends](https://katemae.github.io/esports-data-report/).
 
@@ -18,7 +18,7 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 ## **Framing the Problem** <a name="frame_problem"></a>
 League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique abilities and techniques. Nonetheless, with over 160 champions, some will have similar playstyles and are thus grouped into **classes**. 
 
-League features six main classes for its champions, each with its own unique strengths and weaknesses:
+League of Legends features six main classes for its champions, each with its own unique strengths and weaknesses:
 
 #### **Tanks**
 
