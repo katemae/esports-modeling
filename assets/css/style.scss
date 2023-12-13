@@ -42,6 +42,11 @@ $header-bg-color-secondary: #0A323C !default;
   height: auto;
 }
 
+.center-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 // /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
 // @media screen and (min-width: 601px) {
 //   h1 {
