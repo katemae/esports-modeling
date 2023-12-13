@@ -62,7 +62,7 @@ Due to different classes having different affinities, the distributions of their
 
 ### **Description of Columns** <a name="col_desc"></a>
 
-Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the "time of prediciton*. The post-game data that we will be using are the following:
+Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the *"time of prediciton"*. The post-game data that we will be using are the following:
 
 * `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
 
