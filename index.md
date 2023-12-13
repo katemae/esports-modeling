@@ -122,7 +122,7 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 <table class="centered-table">
 <tr><th> Proportion of Each Class in Data </th><th> Proportion of Each Class Out of ALL Champions </th></tr>
-<tr><td style="margin:auto;border:solid; width:50%">
+<tr><td style="align:center; width:50%">
 
 
 | class    |     ratio |
@@ -135,7 +135,7 @@ The metric we will be using to evaluate our model will be **accuracy**.
 | Assassin | 0.0668827 |
 
 
-</td><td style="margin:auto;border:solid; width:50%">
+</td><td style="align:center; width:50%">
 
 
 | class    |     ratio |
@@ -150,13 +150,13 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 </td></tr> </table>
 
-As seen above, the distribution of the data amongst the six classes aligns with their presence out of all champions. Thus, accuracy is a valid metric to assess our model on. 
+As seen above, the distribution of the data amongst the six classes aligns with their presence out of all champions. In other words, the weights of each class corresponds with their weight out of all champions, thus, there is no class imbalance and accuracy is a valid metric to assess our model on. 
 
 Now we are ready for predictive modeling!
 
 ## **Baseline Model** <a name="baseline_model"></a>
 
-Before working with all our columns, let's begin by creating a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
+Before working with all our columns, we will first create a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
 
 * `'position'`: We include this **nominal** bacause each position has certain characteristics that make some classes stronger in those position than others. For example, fighters are often played in the top lane because they are more self sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster. 
 
