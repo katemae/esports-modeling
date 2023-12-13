@@ -58,7 +58,7 @@ Supports, like Lulu (shown above), can offer a wide range of utility such as stu
 
 <br>
 
-Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. **In this notebook, we will look to create a model that predicts which class of champion a player was playing given their post-game statistics.**
+Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. **Because of this, we have chosen for our report to create a model that predicts which class of champion a player was playing given their post-game statistics. To do so, we have chosen to use a multiclass classification.**
 
 ### **Description of Columns** <a name="col_desc"></a>
 
