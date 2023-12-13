@@ -122,7 +122,7 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 <table class="centered-table">
 <tr><th> Proportion of Each Class in Data </th><th> Proportion of Each Class Out of ALL Champions </th></tr>
-<tr><td class="centered-table">
+<tr><td style="margin:auto;border:solid; width:50%">
 
 
 | class    |     ratio |
@@ -135,7 +135,7 @@ The metric we will be using to evaluate our model will be **accuracy**.
 | Assassin | 0.0668827 |
 
 
-</td><td class="centered-table">
+</td><td style="margin:auto;border:solid; width:50%">
 
 
 | class    |     ratio |
