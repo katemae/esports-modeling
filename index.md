@@ -6,16 +6,18 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 
 <br>
 
-### Table of contents
+### Table of Contents
 1. [Framing the Problem](#frame_problem) <br>
-    a. [Description of Columns](#col_desc)
-2. [Baseline Model](#baseline_model) <br>
-3. [Final Model](#final_model) <br>
-4. [Fairness Analysis](#fairness)<br>
+    a. [Description of Data](#data_desc) <br>
+    b. [The Main Plan](#plan)
+3. [Baseline Model](#baseline_model) <br>
+4. [Final Model](#final_model) <br>
+5. [Fairness Analysis](#fairness)<br>
 
 <br>
 
 ## **Framing the Problem** <a name="frame_problem"></a>
+
 League of Legends is a game that features a very diverse cast of over 160 characters, or champions, who each have their own unique abilities and techniques. Nonetheless, with over 160 champions, some will have similar playstyles and are thus grouped into **classes**. 
 
 League of Legends features six main classes for its champions, each with its own unique strengths and weaknesses:
@@ -58,9 +60,9 @@ Supports, like Lulu (shown above), can offer a wide range of utility such as stu
 
 <br>
 
-Due to different classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. **Because of this, we have chosen for our report to create a model that predicts which class of champion a player was playing given their post-game statistics. To do so, we have chosen to use a multiclass classification by implementing a random forest classifier.**
+Due to each of the classes having different affinities, the distributions of their post-game statistics also tends to be quite different. For example, assassins and marksmen may have a very high number of kills, while supports may tend to have more assists. **Because of this, we have chosen for our report to create a model that predicts which class of champion a player was playing given their post-game statistics**.
 
-### **Description of Columns** <a name="col_desc"></a>
+### **Description of Data** <a name="data_desc"></a>
 
 Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the *"time of prediciton"*. The post-game data that we will be using are the following:
 
@@ -90,9 +92,11 @@ Thus, we will keep all the above columns in our dataset, along with the column c
 
 Before we proceed, however, we must first address some of the missing values in our dataset. The vast majority of the missing values are missing by design (MD) because certain leagues do not keep track of certain statistics. For example, leagues like LPL and LDL do not keep track of statistics like gold difference at 15 minutes, or damage mitigated per minute. These statistics are essential to make our predictions, since sometimes getting an early lead over the opponent or mitigating damage is a key part of the playstle of a class as described earlier. 
 
-Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data.
+Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data. Additionally, like our previous project, we have removed rows of data containing aggregated team statistics since they are irrelevant to determining an *individual's* champion.
 
 <br>
+
+With missing values accounted for and the specific statistics chosen, we are left with 104900 rows and 28 columns of data:
 
 | class    |   gamelength | position   |   kills |   deaths |   assists |   doublekills |   triplekills |   quadrakills |   pentakills |     dpm |   damagetakenperminute |   damagemitigatedperminute |    wpm |   wcpm |   controlwardsbought |   vspm |   minionkills |   monsterkills |   goldat15 |   xpat15 |   csat15 |   golddiffat15 |   xpdiffat15 |   csdiffat15 |   killsat15 |   assistsat15 |   deathsat15 |
 |:---------|-------------:|:-----------|--------:|---------:|----------:|--------------:|--------------:|--------------:|-------------:|--------:|-----------------------:|---------------------------:|-------:|-------:|---------------------:|-------:|--------------:|---------------:|-----------:|---------:|---------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|
@@ -108,7 +112,43 @@ Because of this, we will be removing the rows corresponding to leagues that do n
 | Marksman |         1680 | bot        |       2 |        1 |         3 |             0 |             0 |             0 |            0 | 386.321 |                332.643 |                    199.143 | 0.4643 | 0.2143 |                    5 | 1.0357 |           224 |             12 |       5012 |     5012 |      114 |           -475 |         -866 |          -11 |           1 |             1 |            0 |
 | Mage     |         1680 | sup        |       0 |        5 |         4 |             0 |             0 |             0 |            0 | 243.964 |                553.964 |                    386.679 | 0.8929 | 0.2143 |                    8 | 2.1786 |            16 |              0 |       3192 |     3586 |        2 |           -140 |           19 |           -1 |           0 |             3 |            2 |
 
-Now our data is ready for predictive modeling!
+### **The Main Plan** <a name="plan"></a>
+
+With our data cleaned, we can formally outline the goals and plans for our model.
+
+As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by webscraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
+
+The metric we will be using to evaluate our model will be **accuracy**.
+
+<table align="center">
+<tr><th> Proportion of Each Class in Data </th><th> Proportion of Each Class out of ALL Champions </th></tr>
+<tr><td align="center">
+
+|    class | proportion |      
+|:---------|-----------:|
+| Fighter  |   0.279371 |
+| Marksman |   0.229171 |
+| Mage     |   0.179781 |
+| Tank     |   0.136378 |
+| Support  |   0.108418 |
+| Assassin |  0.0668827 |
+
+</td><td align="center">
+
+|    class | proportion |
+|:---------|-----------:|
+| Fighter  |   0.277778 |
+| Mage     |   0.216049 |
+| Marksman |   0.166667 |
+| Tank     |    0.12963 |
+| Assassin |   0.111111 |
+| Support  |  0.0987654 |
+
+</td></tr> </table>
+
+As seen above, the distribution of the data amongst the six classes aligns with their presence out of all champions. Thus, accuracy is a valid metric to assess our model on. 
+
+Now we are ready for predictive modeling!
 
 ## **Baseline Model** <a name="baseline_model"></a>
 
