@@ -122,8 +122,8 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 <table style="align:center" class="center-table">
 <tr><th> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
-<tr><td>
-
+<tr><td><table></table>
+    
 | class    |     ratio |
 |:---------|----------:|
 | Fighter  | 0.279371  |
@@ -166,10 +166,10 @@ Before working with all our columns, we will first create a baseline model using
 
 Graph One Test
 
-&lt;iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0>
+<iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
 
 Graph Two Test
 
-&lt;iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0>
+<iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
 
 end page.
