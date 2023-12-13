@@ -122,27 +122,71 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 <table style="align:center" class="center-table">
 <tr><th> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
-<tr><td><table></table>
+<tr><td>
     
-| class    |     ratio |
-|:---------|----------:|
-| Fighter  | 0.279371  |
-| Marksman | 0.229171  |
-| Mage     | 0.179781  |
-| Tank     | 0.136378  |
-| Support  | 0.108418  |
-| Assassin | 0.0668827 |
+<table>
+    <tr>
+        <th>class</th>
+        <td>ratio</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>0.279371</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.229171</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.179781</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.136378</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.108418</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>0.0668827</td>
+    </tr>
+</table>
 
 </td><td>
 
-| class    |     ratio |
-|:---------|----------:|
-| Fighter  | 0.277778  |
-| Mage     | 0.216049  |
-| Marksman | 0.166667  |
-| Tank     | 0.12963   |
-| Assassin | 0.111111  |
-| Support  | 0.0987654 |
+<table>
+    <tr>
+        <th>class</th>
+        <td>ratio</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>0.277778</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.216049</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.166667</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.12963</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>0.111111</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.0987654</td>
+    </tr>
+</table>
 
 </td></tr> </table>
 
