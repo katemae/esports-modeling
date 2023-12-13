@@ -120,12 +120,12 @@ As explained earlier, the **response variable** we will be predicting for is the
 
 The metric we will be using to evaluate our model will be **accuracy**.
 
-<table align="center">
+<table class="centered_table">
 <tr><th> Proportion of Each Class in Data </th><th> Proportion of Each Class Out of ALL Champions </th></tr>
-<tr><td align="center">
+<tr><td class="centered_table">
 
 
-|          |     class |
+| class    |     ratio |
 |:---------|----------:|
 | Fighter  | 0.279371  |
 | Marksman | 0.229171  |
@@ -135,10 +135,10 @@ The metric we will be using to evaluate our model will be **accuracy**.
 | Assassin | 0.0668827 |
 
 
-</td><td align="center">
+</td><td class="centered_table">
 
 
-|          |         0 |
+| class    |     ratio |
 |:---------|----------:|
 | Fighter  | 0.277778  |
 | Mage     | 0.216049  |
