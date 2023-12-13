@@ -121,37 +121,37 @@ As explained earlier, the **response variable** we will be predicting for is the
 The metric we will be using to evaluate our model will be **accuracy**.
 
 <table class="centered-table">
-    <tr>
-        <th> Proportion of Each Class in Data </th>
-        <th> Proportion of Each Class Out of ALL Champions </th>
-    </tr>
-    <tr>
-        <td class="inner">
-    
-    | class    |     ratio |
-    |:---------|----------:|
-    | Fighter  | 0.279371  |
-    | Marksman | 0.229171  |
-    | Mage     | 0.179781  |
-    | Tank     | 0.136378  |
-    | Support  | 0.108418  |
-    | Assassin | 0.0668827 |
-    
-        </td>
-        
-        <td class="inner">
-    
-    | class    |     ratio |
-    |:---------|----------:|
-    | Fighter  | 0.277778  |
-    | Mage     | 0.216049  |
-    | Marksman | 0.166667  |
-    | Tank     | 0.12963   |
-    | Assassin | 0.111111  |
-    | Support  | 0.0987654 |
-    
-        </td>
-    </tr>
+<tr>
+    <th> Proportion of Each Class in Data </th>
+    <th> Proportion of Each Class Out of ALL Champions </th>
+</tr>
+<tr>
+<td class="inner">
+
+| class    |     ratio |
+|:---------|----------:|
+| Fighter  | 0.279371  |
+| Marksman | 0.229171  |
+| Mage     | 0.179781  |
+| Tank     | 0.136378  |
+| Support  | 0.108418  |
+| Assassin | 0.0668827 |
+
+</td>
+
+<td class="inner">
+
+| class    |     ratio |
+|:---------|----------:|
+| Fighter  | 0.277778  |
+| Mage     | 0.216049  |
+| Marksman | 0.166667  |
+| Tank     | 0.12963   |
+| Assassin | 0.111111  |
+| Support  | 0.0987654 |
+
+</td>
+</tr>
 </table>
 
 As seen above, the distribution of the data amongst the six classes aligns with their presence out of all champions. In other words, the weights of each class corresponds with their weight out of all champions, thus, there is no class imbalance and accuracy is a valid metric to assess our model on. 
