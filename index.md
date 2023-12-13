@@ -166,10 +166,10 @@ Before working with all our columns, we will first create a baseline model using
 
 Graph One Test
 
-&lt;iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
+&lt;iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0>
 
 Graph Two Test
 
-&lt;iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
+&lt;iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0>
 
 end page.
