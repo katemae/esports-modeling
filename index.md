@@ -120,7 +120,7 @@ As explained earlier, the **response variable** we will be predicting for is the
 
 The metric we will be using to evaluate our model will be **accuracy**.
 
-<table class="center-table">
+<table style="align:center" class="center-table">
 <tr><th> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
 <tr><td>
 
