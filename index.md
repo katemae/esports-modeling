@@ -120,7 +120,7 @@ As explained earlier, the **response variable** we will be predicting for is the
 
 The metric we will be using to evaluate our model will be **accuracy**.
 
-<table class="centered-table">
+<table class="center-table">
 <tr><th> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
 <tr><td>
 
@@ -164,10 +164,11 @@ Before working with all our columns, we will first create a baseline model using
 
 ## **Fairness Analysis** <a name="fairness"></a>
 
+Graph One Test
 
-<iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0>
 
+Graph Two Test
 
-<iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
-
-
+<iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0>
+end page.
