@@ -125,27 +125,27 @@ The metric we will be using to evaluate our model will be **accuracy**.
 <tr><td align="center">
 
 
-|    class | proportion |      
-|:---------|-----------:|
-| Fighter  |   0.279371 |
-| Marksman |   0.229171 |
-| Mage     |   0.179781 |
-| Tank     |   0.136378 |
-| Support  |   0.108418 |
-| Assassin |  0.0668827 |
+|          |     class |
+|:---------|----------:|
+| Fighter  | 0.279371  |
+| Marksman | 0.229171  |
+| Mage     | 0.179781  |
+| Tank     | 0.136378  |
+| Support  | 0.108418  |
+| Assassin | 0.0668827 |
 
 
 </td><td align="center">
 
 
-|    class | proportion |
-|:---------|-----------:|
-| Fighter  |   0.277778 |
-| Mage     |   0.216049 |
-| Marksman |   0.166667 |
-| Tank     |    0.12963 |
-| Assassin |   0.111111 |
-| Support  |  0.0987654 |
+|          |         0 |
+|:---------|----------:|
+| Fighter  | 0.277778  |
+| Mage     | 0.216049  |
+| Marksman | 0.166667  |
+| Tank     | 0.12963   |
+| Assassin | 0.111111  |
+| Support  | 0.0987654 |
 
 
 </td></tr> </table>
