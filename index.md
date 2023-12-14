@@ -263,7 +263,7 @@ As outlined in the problem framing section, there are many more columns in our o
 
 ### **Data Justification** <a name="justify_data"></a>
 
-Let's take a look at what other columns we have remainging in our data, which are all **quantitative** features:
+Let's take a look at what other columns we have remaining in our data, which are all **quantitative** features:
 
 * `'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`: Certain classes of champions are more suited for getting many kills at a time--namely those who can constantly pressure the enemy with damage, like fighters or marksmen.
 
@@ -299,9 +299,9 @@ However, with all out columns, this model is still not complete since we still n
 
 
 </td></tr> </table>
-
+<br>
 <table style="align:center">
-<tr><th>Weighted Average F-1 Score on Our Training Data</th><th>Weighted Average F-1 Score on Our Test Data</th></tr>
+<tr><th>Weighted Avg. F-1 Score on Our Training Data</th><th>Weighted Avg. F-1 Score on Our Test Data</th></tr>
 <tr style="align:center"><td style="align:center">
     
 0.875362
@@ -366,7 +366,7 @@ Although around 0.88 training F1-Score and 0.78 testing F1-Score is quite good, 
 </table>
 
 </td><td>
-
+<br>
 <table style="align:center">
     <tr>
         <th>class</th>
@@ -412,7 +412,7 @@ In comparison to our baseline model, we see an **increase in our weighted averag
 
 Our model seems to predict data pretty well on average; however, there is an underlying bias within the model. It is likely that the model is better at predicting the class of a champion whose ``position`` is `bot` than any of the other positions.
 
-## **Background Information** <a name="bg_info"></a>
+### **Background Information** <a name="bg_info"></a>
 
 In professional League, marksmen constitute the majority of a team's middle and late game damage. Most often, these champions are played in the bottom lane, since they have a support to protect them and alleviate their weakness of dying quickly once enemies get within reach of them. As such, the vast majority of the time, teams will draft a marksman champion to be played in the bottom lane to have a well-balanced team composition. We can look at the most common class for every position to confirm this:
 
@@ -440,20 +440,38 @@ This tells us that the champion drafted for top lane was a fighter about 70% of 
 
 Since we used the `'position'` column while training our model, it is highly likely that the model was easily able to classify a champion as a marksman purely by seeing that the they were played in bot lane, without necessarily taking all the other post-game statistics into account--which it would have had to do for all other positions. We will use a permutation test to determine whether this could be true.
 
-## **Hypothesis Testing** <a name="hyp_test"></a>
+### **Hypothesis Testing** <a name="hyp_test"></a>
 
-Our null and alternate hypotheses are defined below:
+Our null and alternate hypotheses are as defined below:
 
 #### Null Hypothesis:
+
 Our model is fair. Its F1-Score for the `'bot'` lane position and all other positions are roughly the same, and any differences are due to random chance.
 
 #### Alternate Hypothesis:
+
 Our model is unfair. The F1-Score for the `'bot'` lane position is different than all other positions.
+
+#### Test Statistic:
+
+Our test statistic is the difference weighted average F1-Score, specifically the difference between the weighted average F1-Score of **only** the `bot` position and the weighted average F1-Score for the rest of the positions. For our **observed** test statistic, we have **0.19766802823666452** as our difference.
+
+If our null hypothesis is true and the model's F1-Score for bot laners is the same as it is for every other lane, then shuffling the 'position' column should not result in a significant change in our test statistic. Thus, we will repeatedly shuffle the 'position' column, creating a new DataFrame, then obtain our test statistic from that new DataFrame. We can then compare the values we obtain to our observed statistic in order to see whether it is significantly large.
+
+After shuffling the 'position' column of the dataset and recording the test statistic on each shuffled DataFrame 500 times, we obtained the following distribution of test statistics:
 
 <iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
 
-Graph Two Test
+When we compare our observed statistic to the ones we obtained through permutation testing:
 
 <iframe src="assets/fig/emp_distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
 
-end page.
+We can see that our observed statistic is extremely significant–that is, it is highly unlikely that our data was obtained from a distribution in which the score of `bot` position was the same as the rest of the positions.
+
+Our **p-value of 0.0** confirms this, since it is lower than a **significance level of 0.01**.
+
+<br>
+
+With this data, we have enough evidence to reject the null hypothesis which states that our model's F1-Score for predicting bot lane champions is the same as for the other roles. Through doing this permutation test, we have cast doubt on the claim that our model is equally good at predicting champions in all roles.
+
+However, it is important to note that this test does not necessarily *prove* that our model is unfair. We have simply obtained evidence that supports this hypothesis.
