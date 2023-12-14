@@ -11,6 +11,7 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
     a. [Description of Data](#data_desc) <br>
     b. [The Main Plan](#plan)
 3. [Baseline Model](#baseline_model) <br>
+    a. [Model Evaluation](#base_eval) <br>
 4. [Final Model](#final_model) <br>
 5. [Fairness Analysis](#fairness)<br>
 
@@ -192,7 +193,7 @@ The metric we will be using to evaluate our model will be **F1-Score**.
 
 <iframe src="assets/fig/class_imbalance.html" width=800 height=600 frameBorder=0></iframe>
 
-As seen above, the distribution of the data amongst the six classes does not aligns with their presence out of all champions, nor is the data evenly balances amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using F1-Score per class and averaged for all.
+As seen above, the distribution of the data amongst the six classes does not align with their presence out of all champions, nor is the data evenly balanced amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using the **F1-Score** per each class and averaged for all.
 
 Now we are ready for predictive modeling!
 
@@ -200,11 +201,41 @@ Now we are ready for predictive modeling!
 
 Before working with all our columns, we will first create a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
 
-* `'position'`: We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those position than others. For example, fighters are often played in the top lane because they are more self sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster. 
+### `'position'`
 
-* `'gamelength'`: We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
+We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those position than others. For example, fighters are often played in the top lane because they are more self sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster.
 
-* `'kills'`, `'deaths'`, and `'assists'`:  We include these **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
+Because this is a nominal feature, we need to quantify the data to be compatible with our classifier. To do so, we perform a One-Hot Encoding on this column.
+
+### `'gamelength'`
+
+We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
+
+Because this column is recorded in seconds, there is a LARGE variety of values stored (around 1625 unique values to be exact), with a minimum of 921 seconds and a maximum of 3577 seconds. For the purposes of our analysis, we will perform a Quantile Transformation. This way, the `'gamelength` column will display whether the game length was in the 10th percentile of game lengths, the 20th percentile of game lengths, etc.
+
+### `'kills'`, `'deaths'`, and `'assists'`
+
+We include these three **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
+
+For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game.
+
+<br>
+<br>
+
+After performing all these necessary preprocessing encodings and transormations to our data, we set a RandomForestClassifier for our model initialized with an arbitrary max depth of 15 to begin with (later, we will use the GridSearchCV function in our final model to fine-tune this hyperparameter).
+
+## **Model Evaluation** <a name="base_eval"></a>
+
+Let's take a look at the F1-score of our model on the training and testing data sets:
+
+### Confusion Matrix on Our Training Data
+
+<img src="assets/fig/XXXXX" alt="Confusion Matrix on Our Training Data" width="600" height="338" class="clip">
+
+### Confusion Matrix on Our Test Data
+
+<img src="assets/fig/XXXXX" alt="Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
+
 
 ## **Final Model** <a name="final_model"></a>
 
