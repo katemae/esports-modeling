@@ -1,4 +1,4 @@
-## DSC 80 Project
+### DSC 80 Project
 ***By Katelyn Abille and Aneesh Pamula*** <br> <br>
 Curated by students of DSC 80, this academic project is a continuation of our previous exploratory data analysis performed on League of Legends 2022 competitive matches data. Our website stands as a holistic report of our findings, demonstrating the process of cleaning, transforming, and fitting our data for a prediction model, as well as assessing the fairness of our model.
 > Our exploratory data analysis on this dataset can be found here:
@@ -115,85 +115,15 @@ With missing values accounted for and the specific statistics chosen, we are lef
 
 ### **The Main Plan** <a name="plan"></a>
 
-With our data cleaned, we can formally outline the goals and plans for our model.
+Now that our data cleaned, we can formally outline the goals and plans for our model.
 
 As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by webscraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
 
 The metric we will be using to evaluate our model will be **F1-Score**.
 
-<table style="align:center" class="center-table">
-<tr><th style="align:center"> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
-<tr><td>
-    
-<table style="align:center">
-    <tr>
-        <th>class</th>
-        <td>ratio</td>
-    </tr>
-    <tr>
-        <th>Fighter</th>
-        <td>0.279371</td>
-    </tr>
-    <tr>
-        <th>Marksman</th>
-        <td>0.229171</td>
-    </tr>
-    <tr>
-        <th>Mage</th>
-        <td>0.179781</td>
-    </tr>
-    <tr>
-        <th>Tank</th>
-        <td>0.136378</td>
-    </tr>
-    <tr>
-        <th>Support</th>
-        <td>0.108418</td>
-    </tr>
-    <tr>
-        <th>Assassin</th>
-        <td>0.0668827</td>
-    </tr>
-</table>
-
-</td><td>
-
-<table style="align:center">
-    <tr>
-        <th>class</th>
-        <td>ratio</td>
-    </tr>
-    <tr>
-        <th>Fighter</th>
-        <td>0.277778</td>
-    </tr>
-    <tr>
-        <th>Mage</th>
-        <td>0.216049</td>
-    </tr>
-    <tr>
-        <th>Marksman</th>
-        <td>0.166667</td>
-    </tr>
-    <tr>
-        <th>Tank</th>
-        <td>0.12963</td>
-    </tr>
-    <tr>
-        <th>Assassin</th>
-        <td>0.111111</td>
-    </tr>
-    <tr>
-        <th>Support</th>
-        <td>0.0987654</td>
-    </tr>
-</table>
-
-</td></tr> </table>
-
 <iframe src="assets/fig/class_imbalance.html" width=800 height=600 frameBorder=0></iframe>
 
-As seen above, the distribution of the data amongst the six classes does not align with their presence out of all champions, nor is the data evenly balanced amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using the **F1-Score** per each class and averaged for all.
+As seen above, the distribution of the data amongst the six classes does not align with their presence out of all champions, nor is the data evenly balanced amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using the weighterd average of **F1-Scores** from each class.
 
 Now we are ready for predictive modeling!
 
@@ -227,6 +157,8 @@ After performing all these necessary preprocessing encodings and transormations 
 ## **Model Evaluation** <a name="base_eval"></a>
 
 Let's take a look at the F1-score of our model on the training and testing data sets:
+
+
 
 ### Confusion Matrix on Our Training Data
 
