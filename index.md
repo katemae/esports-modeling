@@ -135,23 +135,23 @@ Now we are ready for predictive modeling!
 
 Before working with all our columns, we will first create a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
 
-### **`'position'`**
+#### **`'position'`**
 
 We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those positions than others. For example, fighters are often played in the top lane because they are more self-sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster.
 
 Because this is a nominal feature, we need to quantify the data to be compatible with our classifier. To do so, we perform a One-Hot Encoding on this column.
 
-### **`'gamelength'`**
+#### **`'gamelength'`**
 
 We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
 
 Because this column is recorded in seconds, there is a LARGE variety of values stored (around 1625 unique values to be exact), with a minimum of 921 seconds and a maximum of 3577 seconds. For the purposes of our analysis, we will perform a Quantile Transformation. This way, the `'gamelength'` column will display whether the game length was in the 10th percentile of game lengths, the 20th percentile of game lengths, etc.
 
-### **`'kills'`, `'deaths'`, and `'assists'`**
+#### **`'kills'`, `'deaths'`, and `'assists'`**
 
 We include these three **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
 
-For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game. Note that because these transformations rely on `'gamelength'` post-transformation, the Quantile Transformation will be performed prior to preprocessing all other features.
+For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these statistics--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game. Note that because these transformations rely on `'gamelength'` post-transformation, the Quantile Transformation will be performed prior to preprocessing all other features.
 
 <br>
 <br>
@@ -265,27 +265,27 @@ As outlined in the problem framing section, there are many more columns in our o
 
 Let's take a look at what other columns we have remaining in our data, which are all **quantitative** features:
 
-### **`'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`**
+#### **`'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`**
 
 Certain classes of champions are more suited for getting many kills at a time--namely those who can constantly pressure the enemy with damage, like fighters or marksmen.
 
-### **`'minionkills'` and `'monsterkills'`**
+#### **`'minionkills'` and `'monsterkills'`**
 
 Some classes are more focused on farming as many minions and/or monsters as possible to accumulate gold and grow stronger, while others would rather focus on allowing their teammates to do so. 
 
-### **`'wpm'`, `'wcpm'`, `'controlwardsbought'`, and `'vspm'`**
+#### **`'wpm'`, `'wcpm'`, `'controlwardsbought'`, and `'vspm'`**
 
 Some classes tend to be played in roles that prioritize vision control more heavily.
 
-### **`'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`, `'golddiffat15'`, `'xpdiffat15'`, and `'csdiffat15'`**
+#### **`'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`, `'golddiffat15'`, `'xpdiffat15'`, and `'csdiffat15'`**
 
 Certain classes tend to be stronger in the early stages of the game, allowing them to swing the state of the game in their favor and accumulate large amounts of resources for themselves. Meanwhile, others tend to grow very strong later in the game, and must prioritize playing safe in the early game in order to get to that point.
 
 <br>
 
-Columns like `'doublekills'`, `'triplekills'`, `'quadrakills'`, `'pentakills'`, `'controlwardsbought'`, `'minionkills'`, and `'monsterkills'` are all statistics over the course of an entire game, rather than given at a certain rate (i.e. stats per minute). Because the length of the game can affect these stats, we will standardize them based on the transformed `'gamelength'`, similarly to kills, deaths, and assists from the baseline model.
+Columns like `'doublekills'`, `'triplekills'`, `'quadrakills'`, `'pentakills'`, `'controlwardsbought'`, `'minionkills'`, and `'monsterkills'` are all statistics over the course of an entire game, rather than given at a certain rate (i.e. statistics per minute). Because the length of the game can affect these statistics, we will standardize them based on the transformed `'gamelength'`, similarly to kills, deaths, and assists from the baseline model.
 
-The remaining stats are given based on a rate of time, either per minute or within the first 15 minutes of the game. These columns are: `'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`. <br>
+The remaining statistics are given based on a rate of time, either per minute or within the first 15 minutes of the game. These columns are: `'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`. <br>
 Since these already either take game length into account or do not gain much added context from the game length, we will simply pass them in our model as is.
 
 ### **Model Optimization** <a name="optimize"></a>
