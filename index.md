@@ -147,7 +147,7 @@ Because this column is recorded in seconds, there is a LARGE variety of values s
 
 We include these three **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
 
-For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game.
+For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game. Note that because these transformations rely on `'gamelength'` post-tranformation, the Quantile Tranformation will be performed prior to preprocessing all other features.
 
 <br>
 <br>
@@ -156,18 +156,100 @@ After performing all these necessary preprocessing encodings and transormations 
 
 ## **Model Evaluation** <a name="base_eval"></a>
 
-Let's take a look at the F1-score of our model on the training and testing data sets:
+Let's take a look at the F1-score of our model on the training and testing data sets.
+
+<table>
+<tr><th>Confusion Matrix on Our Training Data</th><th>Confusion Matrix on Our Test Data</th></tr>
+<tr><td>
+
+<img src="assets/fig/base_train.png" alt="Confusion Matrix on Our Training Data" width="600" height="338" class="clip">
+
+</td><td>
+
+<img src="assets/fig/base_test.png" alt="Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
 
 
+</td></tr> </table>
 
-### Confusion Matrix on Our Training Data
+From our confusion matrices, we were able to calculate the F1-Scores for each class, and then determine our final **weighted average F1-Score**:
 
-<img src="assets/fig/XXXXX" alt="Confusion Matrix on Our Training Data" width="600" height="338" class="clip">
+<table style="align:center" class="center-table">
+<tr><th style="align:center"> F1-Scores on Training Data </th><th style="align:center"> F1-Scores on Testing Data </th></tr>
+<tr><td>
+    
+<table style="align:center">
+    <tr>
+        <th>class</th>
+        <td>F1-Score</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>0.230807</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>0.810855</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.788685</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.900276</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.741490</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.504801</td>
+    </tr>
+    <tr>
+        <th>WEIGHTED AVERAGE</th>
+        <td>0.739451</td>
+    </tr>
+</table>
 
-### Confusion Matrix on Our Test Data
+</td><td>
 
-<img src="assets/fig/XXXXX" alt="Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
+<table style="align:center">
+    <tr>
+        <th>class</th>
+        <td>F1-Score</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>0.057986</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>0.777227</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.750102</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.891710</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.650156</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.334723</td>
+    </tr>
+    <tr>
+        <th>WEIGHTED AVERAGE</th>
+        <td>0.675900</td>
+    </tr>
+</table>
 
+</td></tr> </table>
 
 ## **Final Model** <a name="final_model"></a>
 
