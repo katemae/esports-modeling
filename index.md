@@ -71,7 +71,7 @@ Due to each of the classes having different affinities, the distributions of the
 
 Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the *"time of prediction"*. The post-game data that we will be using are the following:
 
-* `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
+* `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom (abbreviated to bot), and support (abbreviated to sup).
 
 * `'gamelength'`: The length of the game in seconds.
 
@@ -97,7 +97,7 @@ Thus, we will keep all the above columns in our dataset, along with the column c
 
 Before we proceed, however, we must first address some of the missing values in our dataset. The vast majority of the missing values are missing by design (MD) because certain leagues do not keep track of certain statistics. For example, leagues like LPL and LDL do not keep track of statistics like gold difference at 15 minutes, or damage mitigated per minute. These statistics are essential to make our predictions, since sometimes getting an early lead over the opponent or mitigating damage is a key part of the playstyle of a class as described earlier. 
 
-Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data. Additionally, like our previous project, we have removed rows of data containing aggregated team statistics since they are irrelevant to determining an *individual's* champion.
+Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data. Additionally, like our previous project, we have removed rows of data containing aggregated team statistics since they are irrelevant to determining an *individual's* champion class.
 
 <br>
 
