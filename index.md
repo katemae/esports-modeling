@@ -121,7 +121,7 @@ With missing values accounted for and the specific statistics chosen, we are lef
 
 Now that our data is cleaned, we can formally outline the goals and plans for our model.
 
-As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by web scraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
+As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which is a nominal variable that can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by web scraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
 
 The metric we will be using to evaluate our model will be **F1-Score**.
 
@@ -135,19 +135,19 @@ Now we are ready for predictive modeling!
 
 Before working with all our columns, we will first create a baseline model using only five columns from our dataset to predict the champion class: `'gamelength'`, `'kills'`, `'deaths'`, `'assists'`, and `'position'`. These statistics are fairly easy to explain to someone who does not know much about League of Legends in contrast to statistics like gold and experience difference. Additionally, these five are a great baseline since they are likely correlated with the class of a champion and are basic statistics easily found for all matches, not just competitive games.
 
-### `'position'`
+## **`'position'`**
 
 We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those positions than others. For example, fighters are often played in the top lane because they are more self-sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster.
 
 Because this is a nominal feature, we need to quantify the data to be compatible with our classifier. To do so, we perform a One-Hot Encoding on this column.
 
-### `'gamelength'`
+## **`'gamelength'`**
 
 We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
 
 Because this column is recorded in seconds, there is a LARGE variety of values stored (around 1625 unique values to be exact), with a minimum of 921 seconds and a maximum of 3577 seconds. For the purposes of our analysis, we will perform a Quantile Transformation. This way, the `'gamelength'` column will display whether the game length was in the 10th percentile of game lengths, the 20th percentile of game lengths, etc.
 
-### `'kills'`, `'deaths'`, and `'assists'`
+## **`'kills'`, `'deaths'`, and `'assists'`**
 
 We include these three **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
 
@@ -265,21 +265,28 @@ As outlined in the problem framing section, there are many more columns in our o
 
 Let's take a look at what other columns we have remaining in our data, which are all **quantitative** features:
 
-* `'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`: Certain classes of champions are more suited for getting many kills at a time--namely those who can constantly pressure the enemy with damage, like fighters or marksmen.
+## **`'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`**
 
-* `'dpm'`, `'damagetakenperminute'`, and `'damagemitigatedperminute'`: Some classes (like marksmen) are more suited for dealing damage, but don't want to be taking a lot of damage. Meanwhile, some classes (like tanks) may not deal as much damage, but are great at drawing the enemies' aggression onto themselves to prevent the damage from going to their team.
+Certain classes of champions are more suited for getting many kills at a time--namely those who can constantly pressure the enemy with damage, like fighters or marksmen.
 
-* `'wpm'`, `'wcpm'`, `'controlwardsbought'`, and `'vspm'`: Some classes tend to be played in roles that prioritize vision control more heavily.
+## **`'minionkills'` and `'monsterkills'`**
 
-* `'minionkills'` and `'monsterkills'`: Some classes are more focused on farming as many minions and/or monsters as possible to accumulate gold and grow stronger, while others would rather focus on allowing their teammates to do so. 
+Some classes are more focused on farming as many minions and/or monsters as possible to accumulate gold and grow stronger, while others would rather focus on allowing their teammates to do so. 
 
-* `'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`: Certain classes tend to be stronger in the early stages of the game, allowing them to swing the state of the game in their favor and accumulate large amounts of resources for themselves. Meanwhile, others tend to grow very strong later in the game, and must prioritize playing safe in the early game in order to get to that point.
+## **`'wpm'`, `'wcpm'`, `'controlwardsbought'`, and `'vspm'`**
+
+Some classes tend to be played in roles that prioritize vision control more heavily.
+
+## **`'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`**
+
+Certain classes tend to be stronger in the early stages of the game, allowing them to swing the state of the game in their favor and accumulate large amounts of resources for themselves. Meanwhile, others tend to grow very strong later in the game, and must prioritize playing safe in the early game in order to get to that point.
+
+<br>
 
 Columns like `'doublekills'`, `'triplekills'`, `'quadrakills'`, `'pentakills'`, `'controlwardsbought'`, `'minionkills'`, and `'monsterkills'` are all statistics over the course of an entire game, rather than given at a certain rate (i.e. stats per minute). Because the length of the game can affect these stats, we will standardize them based on the transformed `'gamelength'`, similarly to kills, deaths, and assists from the baseline model.
 
-Meanwhile, the remaining stats are given based on a rate of time, either per minute or within the first 15 minutes of the game. These columns are:
-`'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`.
-Since these already either take game length into account or don't gain much added context from the game length, we will simply pass them in our model as is.
+The remaining stats are given based on a rate of time, either per minute or within the first 15 minutes of the game. These columns are: `'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`. <br>
+Since these already either take game length into account or do not gain much added context from the game length, we will simply pass them in our model as is.
 
 ### **Model Optimization** <a name="optimize"></a>
 
@@ -311,9 +318,9 @@ However, with all out columns, this model is still not complete since we still n
 0.783073
 
 </td></tr> </table>
-
+<br>
 Although around 0.88 training F1-Score and 0.78 testing F1-Score is quite good, we can make it better by finding the optimal depth of our Random Forest Classifier. Let's do that now, using GridSearchCV, and compare the results:
-
+<br>
 <table>
 <tr><th>Confusion Matrix on Our Training Data <br> With Optimized Depth</th><th>Confusion Matrix on Our Test Data <br> With Optimized Depth</th></tr>
 <tr><td>
@@ -325,7 +332,7 @@ Although around 0.88 training F1-Score and 0.78 testing F1-Score is quite good, 
 <img src="assets/fig/optimized_test.png" alt="Final Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
 
 </td></tr> </table>
-
+<br>
 <table style="align:center" class="center-table">
 <tr><th style="align:center"> F1-Scores on Training Data </th><th style="align:center"> F1-Scores on Testing Data </th></tr>
 <tr><td>
