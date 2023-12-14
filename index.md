@@ -456,6 +456,8 @@ Our model is unfair. The F1-Score for the `'bot'` lane position is different tha
 
 Our test statistic is the difference weighted average F1-Score, specifically the difference between the weighted average F1-Score of **only** the `bot` position and the weighted average F1-Score for the rest of the positions. For our **observed** test statistic, we have **0.19766802823666452** as our difference.
 
+<br>
+
 If our null hypothesis is true and the model's F1-Score for bot laners is the same as it is for every other lane, then shuffling the 'position' column should not result in a significant change in our test statistic. Thus, we will repeatedly shuffle the 'position' column, creating a new DataFrame, then obtain our test statistic from that new DataFrame. We can then compare the values we obtain to our observed statistic in order to see whether it is significantly large.
 
 After shuffling the 'position' column of the dataset and recording the test statistic on each shuffled DataFrame 500 times, we obtained the following distribution of test statistics:
