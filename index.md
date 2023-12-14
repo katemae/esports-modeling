@@ -373,7 +373,7 @@ Although around 0.88 training F1-Score and 0.78 testing F1-Score is quite good, 
 </table>
 
 </td><td>
-<br>
+    
 <table style="align:center">
     <tr>
         <th>class</th>
