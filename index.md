@@ -66,7 +66,7 @@ Due to each of the classes having different affinities, the distributions of the
 
 ### **Description of Data** <a name="data_desc"></a>
 
-Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the *"time of prediciton"*. The post-game data that we will be using are the following:
+Because we are predicting class based on *post-game* statistics, we have free reign on all columns since they are within the *"time of prediction"*. The post-game data that we will be using are the following:
 
 * `'position'`: The position that the champion was played in. This could be top, jungle (abbreviated to jng), middle (abbreviated to mid), bottom, (abbreviated to bot), and support (abbreviated to sup).
 
@@ -92,7 +92,7 @@ Thus, we will keep all the above columns in our dataset, along with the column c
 
 <br>
 
-Before we proceed, however, we must first address some of the missing values in our dataset. The vast majority of the missing values are missing by design (MD) because certain leagues do not keep track of certain statistics. For example, leagues like LPL and LDL do not keep track of statistics like gold difference at 15 minutes, or damage mitigated per minute. These statistics are essential to make our predictions, since sometimes getting an early lead over the opponent or mitigating damage is a key part of the playstle of a class as described earlier. 
+Before we proceed, however, we must first address some of the missing values in our dataset. The vast majority of the missing values are missing by design (MD) because certain leagues do not keep track of certain statistics. For example, leagues like LPL and LDL do not keep track of statistics like gold difference at 15 minutes, or damage mitigated per minute. These statistics are essential to make our predictions, since sometimes getting an early lead over the opponent or mitigating damage is a key part of the playstyle of a class as described earlier. 
 
 Because of this, we will be removing the rows corresponding to leagues that do not store the data we require in the dataset used for our model. Specifically, leagues 'LPL', 'LDL', 'WLDs', and 'DCup' have been completely removed from our data. Additionally, like our previous project, we have removed rows of data containing aggregated team statistics since they are irrelevant to determining an *individual's* champion.
 
@@ -116,9 +116,9 @@ With missing values accounted for and the specific statistics chosen, we are lef
 
 ### **The Main Plan** <a name="plan"></a>
 
-Now that our data cleaned, we can formally outline the goals and plans for our model.
+Now that our data is cleaned, we can formally outline the goals and plans for our model.
 
-As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by webscraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
+As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by web scraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
 
 The metric we will be using to evaluate our model will be **F1-Score**.
 
@@ -134,7 +134,7 @@ Before working with all our columns, we will first create a baseline model using
 
 ### `'position'`
 
-We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those position than others. For example, fighters are often played in the top lane because they are more self sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster.
+We include this **nominal** feature because each position has certain characteristics that make some classes stronger in those positions than others. For example, fighters are often played in the top lane because they are more self-sufficient and do not need the help of their teammates, who are spread throughout the rest of the map. Meanwhile, assassins are often played in the jungle because their high mobility allows them to get around the map faster.
 
 Because this is a nominal feature, we need to quantify the data to be compatible with our classifier. To do so, we perform a One-Hot Encoding on this column.
 
@@ -142,18 +142,18 @@ Because this is a nominal feature, we need to quantify the data to be compatible
 
 We include this **quantitative** feature because different classes tend to be stronger at different levels of the game. For example, a fighter or assassin may contribute the majority of their team's damage in a short (around 25 minutes or less) game, while a marksman will likely contribute the majority of their team's damage in longer games.
 
-Because this column is recorded in seconds, there is a LARGE variety of values stored (around 1625 unique values to be exact), with a minimum of 921 seconds and a maximum of 3577 seconds. For the purposes of our analysis, we will perform a Quantile Transformation. This way, the `'gamelength` column will display whether the game length was in the 10th percentile of game lengths, the 20th percentile of game lengths, etc.
+Because this column is recorded in seconds, there is a LARGE variety of values stored (around 1625 unique values to be exact), with a minimum of 921 seconds and a maximum of 3577 seconds. For the purposes of our analysis, we will perform a Quantile Transformation. This way, the `'gamelength'` column will display whether the game length was in the 10th percentile of game lengths, the 20th percentile of game lengths, etc.
 
 ### `'kills'`, `'deaths'`, and `'assists'`
 
 We include these three **quantitative** features because some classes prioritize aiding their teammates in killing an enemy, while other classes want to be the ones to score those kills. For example, a support or tank champion may focus more on setting up kills for their assassin or marksman teammates rather than actually going for the kills themselves, leading to a low number of kills but high number of assists. Classes who tend to be the first to enter a fight may also end up dying more.
 
-For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game. Note that because these transformations rely on `'gamelength'` post-tranformation, the Quantile Tranformation will be performed prior to preprocessing all other features.
+For our model, we will standardize the `'kills'`, `'deaths'`, and `'assists'` column based on game length using a manually-created `StdScalerByGroup` class. This transformation gives more context to these stats--for example, earning 5 total kills in a 20 minute game would be much more impressive than earning 5 total kills in a 40 minute game. Note that because these transformations rely on `'gamelength'` post-transformation, the Quantile Transformation will be performed prior to preprocessing all other features.
 
 <br>
 <br>
 
-After performing all these necessary preprocessing encodings and transormations to our data, we set a RandomForestClassifier for our model initialized with an arbitrary max depth of 15 to begin with (later, we will use the GridSearchCV function in our final model to fine-tune this hyperparameter).
+After performing all these necessary preprocessing encodings and transformations to our data, we set a RandomForestClassifier for our model initialized with an arbitrary max depth of 15 to begin with (later, we will use the GridSearchCV function in our final model to fine-tune this hyperparameter).
 
 ## **Model Evaluation** <a name="base_eval"></a>
 
