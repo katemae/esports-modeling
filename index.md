@@ -13,6 +13,7 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 3. [Baseline Model](#baseline_model) <br>
     a. [Model Evaluation](#base_eval) <br>
 4. [Final Model](#final_model) <br>
+    a. [Data Justification](#justify_data) <br>
 5. [Fairness Analysis](#fairness)<br>
 
 <br>
@@ -254,6 +255,28 @@ From our confusion matrices, we were able to calculate the F1-Scores for each cl
 As we can see, our baseline model has an average F1-Score of around 0.74 on the training data and an average F1-Score of around 0.68 on the testing data, which is still quite close to the training score. But while there is only a small difference in scores, our scores fall right around 0.7, meaning that our model is _okay_ at generalizing to unseen data. This may be becuase the max depth of the Random Forest may be close to its optimal value. We can actually find this optimal max depth in our final model after we add some new features to further improve our current baseline.
 
 ## **Final Model** <a name="final_model"></a>
+
+As outlined in the problem framing section, there are many more columns in our original dataset that can be used to predict the class of the champion. We will now add these columns to our model, which are all also very likely to be correlated with the class of a champion.
+
+### Data Justification <a name="justify_data"></a>
+
+Let's take a look at what other columns we have remainging in our data, which are all **quantitative** features:
+
+* `'doublekills'`, `'triplekills'`, `'quadrakills'`, and `'pentakills'`: Certain classes of champions are more suited for getting many kills at a time--namely those who can constantly pressure the enemy with damage, like fighters or marksmen.
+
+* `'dpm'`, `'damagetakenperminute'`, and `'damagemitigatedperminute'`: Some classes (like marksmen) are more suited for dealing damage, but don't want to be taking a lot of damage. Meanwhile, some classes (like tanks) may not deal as much damage, but are great at drawing the enemies' aggression onto themselves to prevent the damage from going to their team.
+
+* `'wpm'`, `'wcpm'`, `'controlwardsbought'`, and `'vspm'`: Some classes tend to be played in roles that prioritize vision control more heavily.
+
+* `'minionkills'` and `'monsterkills'`: Some classes are more focused on farming as many minions and/or monsters as possible to accumulate gold and grow stronger, while others would rather focus on allowing their teammates to do so. 
+
+* `'goldat15'`, `'xpat15'`, `'csat15'`,`'killsat15'`, `'assistsat15'`, `'deathsat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`: Certain classes tend to be stronger in the early stages of the game, allowing them to swing the state of the game in their favor and accumulate large amounts of resources for themselves. Meanwhile, others tend to grow very strong later in the game, and must prioritize playing safe in the early game in order to get to that point.
+
+Columns like `'doublekills'`, `'triplekills'`, `'quadrakills'`, `'pentakills'`, `'controlwardsbought'`, `'minionkills'`, and `'monsterkills'` are all statistics over the course of an entire game, rather than given at a certain rate (i.e. stats per minute). Because the length of the game can affect these stats, we will standardize them based on the transformed `'gamelength'`, similarly to kills, deaths, and assists from the baseline model.
+
+Meanwhile, the remaining stats are given based on a rate of time, either per minute or within the first 15 minutes of the game. These columns are:
+`'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`.
+Since these already either take game length into account or don't gain much added context from the game length, we will simply pass them in our model as is.
 
 ## **Fairness Analysis** <a name="fairness"></a>
 
