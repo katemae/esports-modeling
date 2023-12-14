@@ -123,7 +123,7 @@ The metric we will be using to evaluate our model will be **F1-Score**.
 
 <iframe src="assets/fig/class_imbalance.html" width=800 height=600 frameBorder=0></iframe>
 
-As seen above, the distribution of the data amongst the six classes does not align with their presence out of all champions, nor is the data evenly balanced amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using the weighterd average of **F1-Scores** from each class.
+As seen above, the distribution of the data amongst the six classes does not align with their presence out of all champions, nor is the data evenly balanced amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using the weighted average of **F1-Scores** from each class.
 
 Now we are ready for predictive modeling!
 
@@ -250,6 +250,8 @@ From our confusion matrices, we were able to calculate the F1-Scores for each cl
 </table>
 
 </td></tr> </table>
+
+As we can see, our baseline model has an average F1-Score of around 0.74 on the training data and an average F1-Score of around 0.68 on the testing data, which is still quite close to the training score. But while there is only a small difference in scores, our scores fall right around 0.7, meaning that our model is _okay_ at generalizing to unseen data. This may be becuase the max depth of the Random Forest may be close to its optimal value. We can actually find this optimal max depth in our final model after we add some new features to further improve our current baseline.
 
 ## **Final Model** <a name="final_model"></a>
 
