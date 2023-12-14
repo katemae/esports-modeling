@@ -255,7 +255,7 @@ From our confusion matrices, we were able to calculate the F1-Scores for each cl
 
 </td></tr> </table>
 
-As we can see, our baseline model has an average F1-Score of around 0.74 on the training data and an average F1-Score of around 0.68 on the testing data, which is still quite close to the training score. But while there is only a small difference in scores, our scores fall right around 0.7, meaning that our model is _okay_ at generalizing to unseen data. This may be becuase the max depth of the Random Forest may be close to its optimal value. We can actually find this optimal max depth in our final model after we add some new features to further improve our current baseline.
+As we can see, our baseline model has an average F1-Score of around 0.74 on the training data and an average F1-Score of around 0.68 on the testing data, which is still quite close to the training score. But while there is only a small difference in scores, our scores fall right around 0.7, meaning that our model is _okay_ at generalizing to unseen data. This may be because the max depth of the Random Forest may be close to its optimal value. We can actually find this optimal max depth in our final model after we add some new features to further improve our current baseline.
 
 ## **Final Model** <a name="final_model"></a>
 
@@ -444,15 +444,15 @@ Since we used the `'position'` column while training our model, it is highly lik
 
 Our null and alternate hypotheses are as defined below:
 
-#### Null Hypothesis:
+#### **Null Hypothesis:**
 
 Our model is fair. Its F1-Score for the `'bot'` lane position and all other positions are roughly the same, and any differences are due to random chance.
 
-#### Alternate Hypothesis:
+#### **Alternate Hypothesis:**
 
-Our model is unfair. The F1-Score for the `'bot'` lane position is different than all other positions.
+Our model is unfair. The F1-Score for the `'bot'` lane position is different from all other positions.
 
-#### Test Statistic:
+#### **Test Statistic:**
 
 Our test statistic is the difference weighted average F1-Score, specifically the difference between the weighted average F1-Score of **only** the `bot` position and the weighted average F1-Score for the rest of the positions. For our **observed** test statistic, we have **0.19766802823666452** as our difference.
 
