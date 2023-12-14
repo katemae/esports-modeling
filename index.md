@@ -6,7 +6,7 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
 
 <br>
 
-### Table of Contents
+### **Table of Contents**
 1. [Framing the Problem](#frame_problem) <br>
     a. [Description of Data](#data_desc) <br>
     b. [The Main Plan](#plan)
@@ -14,6 +14,7 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
     a. [Model Evaluation](#base_eval) <br>
 4. [Final Model](#final_model) <br>
     a. [Data Justification](#justify_data) <br>
+    b. [Model Optimization](#optimize) <br>
 5. [Fairness Analysis](#fairness)<br>
 
 <br>
@@ -258,7 +259,7 @@ As we can see, our baseline model has an average F1-Score of around 0.74 on the 
 
 As outlined in the problem framing section, there are many more columns in our original dataset that can be used to predict the class of the champion. We will now add these columns to our model, which are all also very likely to be correlated with the class of a champion.
 
-### Data Justification <a name="justify_data"></a>
+### **Data Justification** <a name="justify_data"></a>
 
 Let's take a look at what other columns we have remainging in our data, which are all **quantitative** features:
 
@@ -278,9 +279,172 @@ Meanwhile, the remaining stats are given based on a rate of time, either per min
 `'dpm'`, `'damagetakenperminute'`, `'damagemitigatedperminute'`, `'wpm'`, `'wcpm'`, `'vspm'`, `'goldat15'`, `'xpat15'`, `'csat15'`, `'golddiffat15'`, `'xpdiffat15'`, `'csdiffat15'`, `'killsat15'`, `'assistsat15'`, and `'deathsat15'`.
 Since these already either take game length into account or don't gain much added context from the game length, we will simply pass them in our model as is.
 
+### **Model Optimization** <a name="optimize"></a>
+
+As stated previously, our modeling algorithm in question is a **random forest classifier**; other classifiers such as the K-Nearest Neighbors classifier, were not optimal for our prediction model as running such classifiers took over 100+ minutes.
+
+However, with all out columns, this model is still not complete since we still need to fine-tune the depth parameter. Let's take a look at the F1-Score for the training and testing data of our working model, as well as the confusion matrices corresponding to the training and testing data, **_before_** we optimize our hyperparameter by using an arbitrary depth value of 15 like our baseline:
+
+<table>
+<tr><th>Confusion Matrix on Our Training Data</th><th>Confusion Matrix on Our Test Data</th></tr>
+<tr><td>
+
+<img src="assets/fig/final1_train.png" alt="Confusion Matrix on Our Training Data" width="600" height="338" class="clip">
+
+</td><td>
+
+<img src="assets/fig/final1_test.png" alt="Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
+
+
+</td></tr> </table>
+
+<table style="align:center">
+<tr><th>Weighted Average F-1 Score on Our Training Data</th><th>Weighted Average F-1 Score on Our Test Data</th></tr>
+<tr style="align:center"><td style="align:center">
+    
+0.875362
+
+</td><td style="align:center">
+
+0.783073
+
+</td></tr> </table>
+
+Although around 0.88 training F1-Score and 0.78 testing F1-Score is quite good, we can make it better by finding the optimal depth of our Random Forest Classifier. Let's do that now, using GridSearchCV, and compare the results:
+
+<table>
+<tr><th>Confusion Matrix on Our Training Data <br> With Optimized Depth</th><th>Confusion Matrix on Our Test Data <br> With Optimized Depth</th></tr>
+<tr><td>
+
+<img src="assets/fig/optimized_train.png" alt="Final Confusion Matrix on Our Training Data" width="600" height="338" class="clip">
+
+</td><td>
+
+<img src="assets/fig/optimized_test.png" alt="Final Confusion Matrix on Our Test Data" width="600" height="338" class="clip">
+
+</td></tr> </table>
+
+<table style="align:center" class="center-table">
+<tr><th style="align:center"> F1-Scores on Training Data </th><th style="align:center"> F1-Scores on Testing Data </th></tr>
+<tr><td>
+    
+<table style="align:center">
+    <tr>
+        <th>class</th>
+        <td>F1-Score</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>1.000000</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>1.000000</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.999965</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.999972</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.999942</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.999953</td>
+    </tr>
+    <tr>
+        <th>WEIGHTED AVERAGE</th>
+        <td>0.999975</td>
+    </tr>
+</table>
+
+</td><td>
+
+<table style="align:center">
+    <tr>
+        <th>class</th>
+        <td>F1-Score</td>
+    </tr>
+    <tr>
+        <th>Assassin</th>
+        <td>0.428107</td>
+    </tr>
+    <tr>
+        <th>Fighter</th>
+        <td>0.836108</td>
+    </tr>
+    <tr>
+        <th>Mage</th>
+        <td>0.804494</td>
+    </tr>
+    <tr>
+        <th>Marksman</th>
+        <td>0.910924</td>
+    </tr>
+    <tr>
+        <th>Support</th>
+        <td>0.769854</td>
+    </tr>
+    <tr>
+        <th>Tank</th>
+        <td>0.694945</td>
+    </tr>
+    <tr>
+        <th>WEIGHTED AVERAGE</th>
+        <td>0.793850</td>
+    </tr>
+</table>
+
+</td></tr> </table>
+
+The F1-Score for this model is _near perfect_ on the training data, and is also quite high on the testing data at around 0.79. Since we have optimized this model using GridSearchCV with a final depth hyperparameter of 38, we can now consider this model our final model.
+
+In comparison to our baseline model, we see an **increase in our weighted average F1-Score** on the test data of around 0.11, and an even greater increase in terms of the training data. This is likely due to the added features to our Random Forest, as well as the optimized depth. Overall, our final model is an improvement to our baseline's performance given its increase in F1-Scores per class, leading to our evaluation metric of weighted average F1-Score increasing as well. With all our findings combined, we can conclude that our final model is a **good** predictive model given that our evaluation metric is high.
+
 ## **Fairness Analysis** <a name="fairness"></a>
 
-Graph One Test
+Our model seems to predict data pretty well on average; however, there is an underlying bias within the model. It is likely that the model is better at predicting the class of a champion whose ``position`` is `bot` than any of the other positions.
+
+In professional League, marksmen constitute the majority of a team's middle and late game damage. Most often, these champions are played in the bottom lane, since they have a support to protect them and alleviate their weakness of dying quickly once enemies get within reach of them. As such, the vast majority of the time, teams will draft a marksman champion to be played in the bottom lane to have a well-balanced team composition. We can look at the most common class for every position to confirm this:
+
+| position   | most commom class    |
+|:-----------|:---------------------|
+| bot        | Marksman             |
+| jng        | Fighter              |
+| mid        | Mage                 |
+| sup        | Support              |
+| top        | Fighter              |
+
+Sure enough, the most common class in bot lane is marksmen. This isn't all though--we can look at how common the most common class is in every position--that is, we can look at the proportion of games in which the most common class of champion was picked.
+
+| position   | most commom class    | proportion |
+|:-----------|:---------------------|-----------:|
+| bot        | Marksman             |   0.956101 |
+| jng        | Fighter              |   0.627121 |
+| mid        | Mage                 |   0.723546 |
+| sup        | Support              |   0.525262 |
+| top        | Fighter              |   0.701954 |
+
+This tells us that the champion drafted for top lane was a fighter about 70% of the time, the champion drafted for mid lane was a mage about 72% of the time, and most importantly, the champion drafted for bot lane was a marksman about 96% of the time! 
+
+<br>
+
+Since we used the `'position'` column while training our model, it is highly likely that the model was easily able to classify a champion as a marksman purely by seeing that the they were played in bot lane, without necessarily taking all the other post-game statistics into account--which it would have had to do for all other positions. We will use a permutation test to determine whether this could be true.
+
+<br>
+
+Our null and alternate hypotheses are defined below:
+
+#### Null Hypothesis:
+Our model is fair. Its F1-Score for the `'bot'` lane position and all other positions are roughly the same, and any differences are due to random chance.
+
+#### Alternate Hypothesis:
+Our model is unfair. The F1-Score for the `'bot'` lane position is different than all other positions.
 
 <iframe src="assets/fig/distrib_ts.html" width=800 height=600 frameBorder=0></iframe>
 
