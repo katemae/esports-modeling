@@ -16,6 +16,8 @@ Curated by students of DSC 80, this academic project is a continuation of our pr
     a. [Data Justification](#justify_data) <br>
     b. [Model Optimization](#optimize) <br>
 5. [Fairness Analysis](#fairness)<br>
+    a. [Background Information](#bg_info) <br>
+    b. [Hypothesis Testing](#hyp_test) <br>
 
 <br>
 
@@ -410,6 +412,8 @@ In comparison to our baseline model, we see an **increase in our weighted averag
 
 Our model seems to predict data pretty well on average; however, there is an underlying bias within the model. It is likely that the model is better at predicting the class of a champion whose ``position`` is `bot` than any of the other positions.
 
+## **Background Information** <a name="bg_info"></a>
+
 In professional League, marksmen constitute the majority of a team's middle and late game damage. Most often, these champions are played in the bottom lane, since they have a support to protect them and alleviate their weakness of dying quickly once enemies get within reach of them. As such, the vast majority of the time, teams will draft a marksman champion to be played in the bottom lane to have a well-balanced team composition. We can look at the most common class for every position to confirm this:
 
 | position   | most commom class    |
@@ -436,7 +440,7 @@ This tells us that the champion drafted for top lane was a fighter about 70% of 
 
 Since we used the `'position'` column while training our model, it is highly likely that the model was easily able to classify a champion as a marksman purely by seeing that the they were played in bot lane, without necessarily taking all the other post-game statistics into account--which it would have had to do for all other positions. We will use a permutation test to determine whether this could be true.
 
-<br>
+## **Hypothesis Testing** <a name="hyp_test"></a>
 
 Our null and alternate hypotheses are defined below:
 
