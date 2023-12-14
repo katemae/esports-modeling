@@ -118,13 +118,13 @@ With our data cleaned, we can formally outline the goals and plans for our model
 
 As explained earlier, the **response variable** we will be predicting for is the **class** of a player's champion, which can be one of six classes described above. (Note that our `'class'` column has been manually added to the data by webscraping the [League of Legends official website](https://www.leagueoflegends.com/en-us/champions/) for the class of each unique champion). Because of the varying outcomes there may be,  we have chosen to use a **multiclass classification** by implementing a *random forest classifier*.
 
-The metric we will be using to evaluate our model will be **accuracy**.
+The metric we will be using to evaluate our model will be **F1-Score**.
 
 <table style="align:center" class="center-table">
-<tr><th> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
+<tr><th style="align:center"> Ratio of Class in Data </th><th style="align:center"> Ratio of Class Out of <br> ALL Champions </th></tr>
 <tr><td>
     
-<table>
+<table style="align:center">
     <tr>
         <th>class</th>
         <td>ratio</td>
@@ -157,7 +157,7 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 </td><td>
 
-<table>
+<table style="align:center">
     <tr>
         <th>class</th>
         <td>ratio</td>
@@ -190,7 +190,9 @@ The metric we will be using to evaluate our model will be **accuracy**.
 
 </td></tr> </table>
 
-As seen above, the distribution of the data amongst the six classes aligns with their presence out of all champions. In other words, the weights of each class corresponds with their weight out of all champions, thus, there is no class imbalance and accuracy is a valid metric to assess our model on. 
+<iframe src="assets/fig/class_imbalance.html" width=800 height=600 frameBorder=0></iframe>
+
+As seen above, the distribution of the data amongst the six classes does not aligns with their presence out of all champions, nor is the data evenly balances amongst all six classes. Because of this class imbalance, we cannot rely on accuracy as our evaluation metric and instead will be using F1-Score per class and averaged for all.
 
 Now we are ready for predictive modeling!
 
